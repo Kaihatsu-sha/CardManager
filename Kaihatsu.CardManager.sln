@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D6959B58-F471-4D9D-9A0E-B4427490EAF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{B02B01A8-BBFF-4304-B12F-816660CDBDF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{644F0B87-8D25-4344-A860-6FA084D45A95}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.CardManager.Core", "Core\Kaihatsu.CardManager.Core\Kaihatsu.CardManager.Core.csproj", "{2D46DCAB-6FC6-4C1D-8F4E-739112890194}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.CardManager.DAL", "Data\Kaihatsu.CardManager.DAL\Kaihatsu.CardManager.DAL.csproj", "{D5FD28C5-26D4-4B58-AADE-9EB9CFCAA02C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.CardManager.DAL.Entities", "Data\Kaihatsu.CardManager.DAL.Entities\Kaihatsu.CardManager.DAL.Entities.csproj", "{FCEDE263-0611-4C14-AC1D-C1E8656F43D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.CardManager.DAL.MSSQL", "Data\Kaihatsu.CardManager.DAL.MSSQL\Kaihatsu.CardManager.DAL.MSSQL.csproj", "{B2EDE097-8E20-424D-B169-972FEE6AFF6B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.CardManager.CardAPI", "Services\Kaihatsu.CardManager.CardAPI\Kaihatsu.CardManager.CardAPI.csproj", "{EEB30145-B3CA-4671-96EC-3F69D1174E6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D46DCAB-6FC6-4C1D-8F4E-739112890194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D46DCAB-6FC6-4C1D-8F4E-739112890194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D46DCAB-6FC6-4C1D-8F4E-739112890194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D46DCAB-6FC6-4C1D-8F4E-739112890194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5FD28C5-26D4-4B58-AADE-9EB9CFCAA02C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5FD28C5-26D4-4B58-AADE-9EB9CFCAA02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5FD28C5-26D4-4B58-AADE-9EB9CFCAA02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5FD28C5-26D4-4B58-AADE-9EB9CFCAA02C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCEDE263-0611-4C14-AC1D-C1E8656F43D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCEDE263-0611-4C14-AC1D-C1E8656F43D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCEDE263-0611-4C14-AC1D-C1E8656F43D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCEDE263-0611-4C14-AC1D-C1E8656F43D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2EDE097-8E20-424D-B169-972FEE6AFF6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2EDE097-8E20-424D-B169-972FEE6AFF6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2EDE097-8E20-424D-B169-972FEE6AFF6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2EDE097-8E20-424D-B169-972FEE6AFF6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEB30145-B3CA-4671-96EC-3F69D1174E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEB30145-B3CA-4671-96EC-3F69D1174E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEB30145-B3CA-4671-96EC-3F69D1174E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEB30145-B3CA-4671-96EC-3F69D1174E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2D46DCAB-6FC6-4C1D-8F4E-739112890194} = {D6959B58-F471-4D9D-9A0E-B4427490EAF5}
+		{D5FD28C5-26D4-4B58-AADE-9EB9CFCAA02C} = {B02B01A8-BBFF-4304-B12F-816660CDBDF5}
+		{FCEDE263-0611-4C14-AC1D-C1E8656F43D5} = {B02B01A8-BBFF-4304-B12F-816660CDBDF5}
+		{B2EDE097-8E20-424D-B169-972FEE6AFF6B} = {B02B01A8-BBFF-4304-B12F-816660CDBDF5}
+		{EEB30145-B3CA-4671-96EC-3F69D1174E6D} = {644F0B87-8D25-4344-A860-6FA084D45A95}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8BB22B58-BD86-412E-9596-C9DEA2702EBD}
+	EndGlobalSection
+EndGlobal

@@ -1,7 +1,7 @@
 ﻿
 namespace Kaihatsu.CardManager.Core.Interfaces;
 
-public interface IRepositoryAsync<T, TId> 
+public interface IRepositoryAsync<T, TId> //FIX : IRepositoryAsync<Card,Guid>
     where T : BaseEntity
     where TId : notnull
 {

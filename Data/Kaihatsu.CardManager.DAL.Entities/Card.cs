@@ -15,5 +15,5 @@ public class Card : BaseEntity
     public DateTime ExpDate { get; set; }
 
     public virtual Client Client { get; set; }
-    public int ClientId { get; set; }
+    public Guid ClientId { get; set; }
 }

@@ -7,7 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Kaihatsu.CardManager.Entities.Dto\Kaihatsu.CardManager.Entities.Dto.csproj" />
+    <ProjectReference Include="..\..\Core\Kaihatsu.CardManager.Core\Kaihatsu.CardManager.Core.csproj" />
+    <ProjectReference Include="..\..\Data\Kaihatsu.CardManager.DAL.Entities\Kaihatsu.CardManager.DAL.Entities.csproj" />
+    <ProjectReference Include="..\..\Data\Kaihatsu.CardManager.DAL.MSSQL\Kaihatsu.CardManager.DAL.MSSQL.csproj" />
+    <ProjectReference Include="..\..\Data\Kaihatsu.CardManager.DAL\Kaihatsu.CardManager.DAL.csproj" />
   </ItemGroup>
 
 </Project>

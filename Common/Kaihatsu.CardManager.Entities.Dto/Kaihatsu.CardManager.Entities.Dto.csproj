@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Core\Kaihatsu.CardManager.Core\Kaihatsu.CardManager.Core.csproj" />
-  </ItemGroup>
-
 </Project>

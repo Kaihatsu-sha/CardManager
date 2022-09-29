@@ -8,7 +8,8 @@ public class CardManagerDbContext : DbContext
 {
     public DbSet<Card> Cards { get; set; }
     public DbSet<Client> Clients { get; set; }
-
+    public DbSet<Account> Accounts { get; set; }
+    public DbSet<AccountSession> AccountSessions { get; set; }
 
     public CardManagerDbContext(DbContextOptions<CardManagerDbContext> options) : base(options)
     {

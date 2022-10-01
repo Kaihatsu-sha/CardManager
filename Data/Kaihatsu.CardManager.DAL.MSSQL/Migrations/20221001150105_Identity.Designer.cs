@@ -4,6 +4,7 @@ using Kaihatsu.CardManager.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kaihatsu.CardManager.DAL.MSSQL.Migrations
 {
     [DbContext(typeof(CardManagerDbContext))]
-    partial class CardManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221001150105_Identity")]
+    partial class Identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +60,6 @@ namespace Kaihatsu.CardManager.DAL.MSSQL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("AccountId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("Closed")
                         .HasColumnType("datetime2");
 
@@ -78,8 +77,6 @@ namespace Kaihatsu.CardManager.DAL.MSSQL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
 
                     b.ToTable("Sessions");
                 });
@@ -133,17 +130,6 @@ namespace Kaihatsu.CardManager.DAL.MSSQL.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("Kaihatsu.CardManager.DAL.Entities.AccountSession", b =>
-                {
-                    b.HasOne("Kaihatsu.CardManager.DAL.Entities.Account", "Account")
-                        .WithMany("Sessions")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-                });
-
             modelBuilder.Entity("Kaihatsu.CardManager.DAL.Entities.Card", b =>
                 {
                     b.HasOne("Kaihatsu.CardManager.DAL.Entities.Client", "Client")
@@ -153,11 +139,6 @@ namespace Kaihatsu.CardManager.DAL.MSSQL.Migrations
                         .IsRequired();
 
                     b.Navigation("Client");
-                });
-
-            modelBuilder.Entity("Kaihatsu.CardManager.DAL.Entities.Account", b =>
-                {
-                    b.Navigation("Sessions");
                 });
 
             modelBuilder.Entity("Kaihatsu.CardManager.DAL.Entities.Client", b =>

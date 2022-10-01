@@ -3,6 +3,7 @@ using Kaihatsu.CardManager.CardAPI.Response;
 using Kaihatsu.CardManager.Core.Interfaces;
 using Kaihatsu.CardManager.DAL.Entities;
 using Kaihatsu.CardManager.DAL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Kaihatsu.CardManager.CardAPI.Controllers;
 
 [Route("api/cards")]
 [ApiController]
+[Authorize]
 public class CardApiController : ControllerBase
 {
     private readonly ILogger<CardApiController> _logger;

@@ -4,17 +4,20 @@ namespace Kaihatsu.CardManager.DAL.Entities;
 
 public class AccountSession: BaseEntity
 {
-    public string SessionToken { get; set; } 
+    public string AccessToken { get; set; }
 
-    public DateTime TimeCreated { get; set; }
-    
-    public DateTime TimeLastRequest { get; set; }
+    public string RefreshToken { get; set; }
 
-    public bool IsClosed { get; set; }
-    
-    public DateTime? TimeClosed { get; set; }
+    public DateTime Created { get; set; }
 
-    public int AccountId { get; set; }
+    public DateTime LastRequest { get; set; }
+
+    public bool IsClosed { get; set; } //TODO: Избыточное поле?
+
+    public DateTime? Closed { get; set; }
 
     public virtual Account Account { get; set; }
+
+    public Guid AccountId { get; set; }
+
 }

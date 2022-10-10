@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.CardManager.Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kaihatsu.CardManager.Identity", "Services\Kaihatsu.CardManager.Identity\Kaihatsu.CardManager.Identity.csproj", "{9E477A87-47AA-4B99-BBD7-7620CE881476}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{AF1F96D0-3272-4E3B-99E4-79EBF4B1A08D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Other.Security", "Other\Other.Security\Other.Security.csproj", "{1DB23D11-7955-4FD8-B034-FA407DE0483B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,10 @@ Global
 		{9E477A87-47AA-4B99-BBD7-7620CE881476}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E477A87-47AA-4B99-BBD7-7620CE881476}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E477A87-47AA-4B99-BBD7-7620CE881476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DB23D11-7955-4FD8-B034-FA407DE0483B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DB23D11-7955-4FD8-B034-FA407DE0483B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DB23D11-7955-4FD8-B034-FA407DE0483B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DB23D11-7955-4FD8-B034-FA407DE0483B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +79,7 @@ Global
 		{EEB30145-B3CA-4671-96EC-3F69D1174E6D} = {644F0B87-8D25-4344-A860-6FA084D45A95}
 		{9DC6B69C-5693-4708-AF6E-89CCDFBDF602} = {84398DA3-E3AE-4ABE-9213-E926662BF731}
 		{9E477A87-47AA-4B99-BBD7-7620CE881476} = {644F0B87-8D25-4344-A860-6FA084D45A95}
+		{1DB23D11-7955-4FD8-B034-FA407DE0483B} = {AF1F96D0-3272-4E3B-99E4-79EBF4B1A08D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8BB22B58-BD86-412E-9596-C9DEA2702EBD}

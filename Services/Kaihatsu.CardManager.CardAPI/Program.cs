@@ -3,9 +3,15 @@ using Kaihatsu.CardManager.Core.Interfaces;
 using Kaihatsu.CardManager.DAL;
 using Kaihatsu.CardManager.DAL.Interfaces;
 using Kaihatsu.CardManager.DAL.Repository;
+using Kaihatsu.CardManager.Identity;
+using Kaihatsu.CardManager.Identity.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using NLog.Web;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,12 +42,62 @@ builder.Services.AddDbContext<CardManagerDbContext>(opt =>
 //builder.Services.AddScoped(typeof(IRepositoryAsync<,>), typeof(CardRepository<>));
 builder.Services.AddScoped<ICardRepositoryAsync, CardRepositoryAsync>();
 builder.Services.AddScoped<IClientRepositoryAsync, ClientRepositoryAsync>();
+builder.Services.AddScoped<IAuthorizationManager, AuthorizationManager>();
+builder.Services.AddScoped<IAccountManager, AccountManager>();
 
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme =
+    JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme =
+    JwtBearerDefaults.AuthenticationScheme;
+})
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new
+                TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AuthorizationManager.SecretKey)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero,
+                    ValidateLifetime = true
+                };
+            });
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Kaihatsu.CardManager", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Description = "JWT Authorization header using the Bearer scheme(Example: 'Bearer 12345abcdef')",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme()
+                        {
+                            Reference = new OpenApiReference()
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+
+});
 
 var app = builder.Build();
 
@@ -53,6 +109,8 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
+app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
 app.UseHttpLogging();

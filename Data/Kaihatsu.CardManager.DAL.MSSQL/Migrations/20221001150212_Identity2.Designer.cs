@@ -4,6 +4,7 @@ using Kaihatsu.CardManager.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kaihatsu.CardManager.DAL.MSSQL.Migrations
 {
     [DbContext(typeof(CardManagerDbContext))]
-    partial class CardManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221001150212_Identity2")]
+    partial class Identity2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,6 +61,9 @@ namespace Kaihatsu.CardManager.DAL.MSSQL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("AccountId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AccounttId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Closed")

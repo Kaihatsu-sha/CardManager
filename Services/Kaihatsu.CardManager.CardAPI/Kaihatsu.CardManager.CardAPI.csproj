@@ -18,10 +18,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Kaihatsu.CardManager.Entities.Dto\Kaihatsu.CardManager.Entities.Dto.csproj" />
+    <ProjectReference Include="..\..\Common\Kaihatsu.CardManager.Request\Kaihatsu.CardManager.Request.csproj" />
+    <ProjectReference Include="..\..\Common\Kaihatsu.CardManager.Response\Kaihatsu.CardManager.Response.csproj" />
     <ProjectReference Include="..\..\Core\Kaihatsu.CardManager.Core\Kaihatsu.CardManager.Core.csproj" />
     <ProjectReference Include="..\..\Data\Kaihatsu.CardManager.DAL.Entities\Kaihatsu.CardManager.DAL.Entities.csproj" />
     <ProjectReference Include="..\..\Data\Kaihatsu.CardManager.DAL.MSSQL\Kaihatsu.CardManager.DAL.MSSQL.csproj" />
     <ProjectReference Include="..\..\Data\Kaihatsu.CardManager.DAL\Kaihatsu.CardManager.DAL.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Kaihatsu.CardManager.AutoMapper\Kaihatsu.CardManager.AutoMapper.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Kaihatsu.CardManager.FluentValidation\Kaihatsu.CardManager.FluentValidation.csproj" />
     <ProjectReference Include="..\Kaihatsu.CardManager.Identity\Kaihatsu.CardManager.Identity.csproj" />
   </ItemGroup>
 

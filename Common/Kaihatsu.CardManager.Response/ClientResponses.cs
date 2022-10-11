@@ -1,7 +1,7 @@
 ﻿using Kaihatsu.CardManager.Core.Interfaces;
 using Kaihatsu.CardManager.DAL.Entities;
 
-namespace Kaihatsu.CardManager.CardAPI.Response;
+namespace Kaihatsu.CardManager.Response;
 
 public class CreateClientResponse : IResponse
 {

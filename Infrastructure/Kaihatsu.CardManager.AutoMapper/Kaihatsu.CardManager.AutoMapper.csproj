@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Kaihatsu.CardManager.Entities.Dto\Kaihatsu.CardManager.Entities.Dto.csproj" />
+    <ProjectReference Include="..\..\Common\Kaihatsu.CardManager.Request\Kaihatsu.CardManager.Request.csproj" />
+    <ProjectReference Include="..\..\Data\Kaihatsu.CardManager.DAL.Entities\Kaihatsu.CardManager.DAL.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

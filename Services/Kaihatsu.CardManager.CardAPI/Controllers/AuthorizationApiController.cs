@@ -1,11 +1,13 @@
-﻿using Kaihatsu.CardManager.CardAPI.Request;
-using Kaihatsu.CardManager.CardAPI.Response;
+﻿using Kaihatsu.CardManager.Request;
+using Kaihatsu.CardManager.Response;
 using Kaihatsu.CardManager.DAL.Interfaces;
 using Kaihatsu.CardManager.Identity.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace Kaihatsu.CardManager.CardAPI.Controllers
 {
@@ -17,37 +19,45 @@ namespace Kaihatsu.CardManager.CardAPI.Controllers
         private readonly ILogger<AuthorizationApiController> _logger;
         private readonly IAuthorizationManager _manager;
         private readonly IAccountManager _accountManager;
+        private readonly IValidator<AuthorizationRequest> _requestValidator;
 
-        public AuthorizationApiController(IAuthorizationManager manager, IAccountManager accountManager,ILogger<AuthorizationApiController> logger)
+        public AuthorizationApiController(
+            IAuthorizationManager manager, 
+            IAccountManager accountManager,
+            ILogger<AuthorizationApiController> logger, 
+            IValidator<AuthorizationRequest> validator)
         {
             _manager = manager;
             _logger = logger;
             _accountManager = accountManager;
+            _requestValidator = validator;
         }
 
         [HttpPost("signin")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [AllowAnonymous]
-        public async Task<IActionResult> SignIn([FromBody] Requesto request, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> SignIn([FromBody] AuthorizationRequest request, CancellationToken cancellationToken = default)
         {
             try
             {
+                
+                ValidationResult validationResult = _requestValidator.Validate(request);
+                if (!validationResult.IsValid)
+                    return BadRequest(validationResult.ToDictionary());
+
                 var ss = _manager.SignIn(request.Login, request.Password);
 
                 Response.Headers.Add(HeaderNames.Authorization, "Bearer " + ss.AccessToken);
 
-                return Ok(new CreateCardResponse
-                {
-                    Card = null
-                });
+                return Ok(new AuthorizationResponse());
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Create card error.");
-                return Ok(new CreateCardResponse
+                _logger.LogError(e, "SignIn error.");
+                return Ok(new AuthorizationResponse
                 {
                     ErrorCode = 1012,
-                    ErrorMessage = "Create card error."
+                    ErrorMessage = "SignIn error."
                 });
             }
         }
@@ -55,33 +65,25 @@ namespace Kaihatsu.CardManager.CardAPI.Controllers
         [HttpPost("create")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [AllowAnonymous]
-        public async Task<IActionResult> Create([FromBody] Requesto request, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Create([FromBody] AuthorizationRequest request, CancellationToken cancellationToken = default)
         {
             try
             {
                 _accountManager.Create(request.Login, request.Password);
                 var ss = _manager.SignIn(request.Login, request.Password);
                 Response.Headers.Add(HeaderNames.Authorization, "Bearer " + ss.AccessToken);
-                return Ok(new CreateCardResponse
-                {
-                    Card = null
-                });
+
+                return Ok(new AuthorizationResponse());
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Create card error.");
-                return Ok(new CreateCardResponse
+                _logger.LogError(e, "Create user error.");
+                return Ok(new AuthorizationResponse
                 {
                     ErrorCode = 1012,
-                    ErrorMessage = "Create card error."
+                    ErrorMessage = "Create user error."
                 });
             }
-        }
-
-        public class Requesto
-        {
-            public string Login { get; set; }
-            public string Password { get; set; }
         }
     }
 }

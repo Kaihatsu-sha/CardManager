@@ -1,6 +1,8 @@
-﻿using Kaihatsu.CardManager.CardAPI.Request;
-using Kaihatsu.CardManager.CardAPI.Response;
+﻿using AutoMapper;
+using Kaihatsu.CardManager.DAL.Entities;
 using Kaihatsu.CardManager.DAL.Interfaces;
+using Kaihatsu.CardManager.Request;
+using Kaihatsu.CardManager.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +17,13 @@ public class ClientApiController : ControllerBase
 {
     private readonly ILogger<CardApiController> _logger;
     private readonly IClientRepositoryAsync _repository;
+    private readonly IMapper _mapper;
 
-    public ClientApiController(IClientRepositoryAsync repository, ILogger<CardApiController> logger)
+    public ClientApiController(IClientRepositoryAsync repository, ILogger<CardApiController> logger, IMapper mapper)
     {
         _repository = repository;
         _logger = logger;
+        _mapper = mapper;
     }
 
     [HttpPost("create")]
@@ -28,12 +32,7 @@ public class ClientApiController : ControllerBase
     {
         try
         {
-            var createdClient = await _repository.CreateAsync(new Kaihatsu.CardManager.DAL.Entities.Client
-            {
-                FirstName = request.FirstName,
-                Patronymic = request.Patronymic,
-                Surname = request.Surname
-            }, cancellationToken);
+            var createdClient = await _repository.CreateAsync(_mapper.Map<Client>(request), cancellationToken);
 
             return Ok(new CreateClientResponse
             {
@@ -105,12 +104,7 @@ public class ClientApiController : ControllerBase
     {
         try
         {
-            var createdClient = await _repository.UpdateAsync(new Kaihatsu.CardManager.DAL.Entities.Client
-            {
-                FirstName = request.FirstName,
-                Patronymic = request.Patronymic,
-                Surname = request.Surname
-            }, cancellationToken);
+            var createdClient = await _repository.UpdateAsync(_mapper.Map<Client>(request), cancellationToken);
 
             return Ok(new UpdateClientResponse
             {
@@ -134,12 +128,7 @@ public class ClientApiController : ControllerBase
     {
         try
         {
-            var createdClient = await _repository.DeleteAsync(new Kaihatsu.CardManager.DAL.Entities.Client
-            {
-                FirstName = request.FirstName,
-                Patronymic = request.Patronymic,
-                Surname = request.Surname
-            }, cancellationToken);
+            var createdClient = await _repository.DeleteAsync(_mapper.Map<Client>(request), cancellationToken);
 
             return Ok(new DeleteClientResponse
             {

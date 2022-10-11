@@ -1,4 +1,4 @@
-﻿namespace Kaihatsu.CardManager.CardAPI.Request;
+﻿namespace Kaihatsu.CardManager.Request;
 
 public class CreateCardRequest
 {

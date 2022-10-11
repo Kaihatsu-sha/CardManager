@@ -5,6 +5,7 @@ using Kaihatsu.CardManager.DAL.Interfaces;
 using Kaihatsu.CardManager.DAL.Repository;
 using Kaihatsu.CardManager.Identity;
 using Kaihatsu.CardManager.Identity.Interfaces;
+using Kaihatsu.CardManager.AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Web;
 using System.Text;
+using Kaihatsu.CardManager.FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region NLog
 
 builder.Services.AddHttpLogging(logging =>
 {
@@ -33,17 +36,23 @@ builder.Host.ConfigureLogging(logging =>
 
 }).UseNLog(new NLogAspNetCoreOptions() { RemoveLoggerFactoryFilter = true });
 
+#endregion
+
 // Add services to the container.
 
 builder.Services.AddDbContext<CardManagerDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"), p => p.MigrationsAssembly("Kaihatsu.CardManager.DAL.MSSQL"))
 );
 
+builder.Services.AddCardMapper();
+builder.Services.AddValidation();
 //builder.Services.AddScoped(typeof(IRepositoryAsync<,>), typeof(CardRepository<>));
 builder.Services.AddScoped<ICardRepositoryAsync, CardRepositoryAsync>();
 builder.Services.AddScoped<IClientRepositoryAsync, ClientRepositoryAsync>();
 builder.Services.AddScoped<IAuthorizationManager, AuthorizationManager>();
 builder.Services.AddScoped<IAccountManager, AccountManager>();
+
+#region Authentication
 
 builder.Services.AddAuthentication(x =>
 {
@@ -68,9 +77,14 @@ builder.Services.AddAuthentication(x =>
                 };
             });
 
+#endregion
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+#region Swagger
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Kaihatsu.CardManager", Version = "v1" });
@@ -98,6 +112,8 @@ builder.Services.AddSwaggerGen(c =>
                 });
 
 });
+
+#endregion
 
 var app = builder.Build();
 

@@ -1,5 +1,5 @@
-﻿using Kaihatsu.CardManager.CardAPI.Request;
-using Kaihatsu.CardManager.CardAPI.Response;
+﻿using Kaihatsu.CardManager.Request;
+using Kaihatsu.CardManager.Response;
 using Kaihatsu.CardManager.Core.Interfaces;
 using Kaihatsu.CardManager.DAL.Entities;
 using Kaihatsu.CardManager.DAL.Interfaces;
@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
+using AutoMapper;
 
 namespace Kaihatsu.CardManager.CardAPI.Controllers;
 
@@ -17,11 +18,13 @@ public class CardApiController : ControllerBase
 {
     private readonly ILogger<CardApiController> _logger;
     private readonly ICardRepositoryAsync _repository;
+    private readonly IMapper _mapper;
 
-    public CardApiController(ICardRepositoryAsync repository, ILogger<CardApiController> logger)
+    public CardApiController(ICardRepositoryAsync repository, ILogger<CardApiController> logger, IMapper mapper)
     {
         _repository = repository;
         _logger = logger;
+        _mapper = mapper;
     }
 
     [HttpPost("create")]
@@ -30,13 +33,7 @@ public class CardApiController : ControllerBase
     {
         try
         {
-            var createdCard = await _repository.CreateAsync(new Kaihatsu.CardManager.DAL.Entities.Card
-            {
-                ClientId = request.ClientId,
-                CardNumber = request.CardNo,
-                ExpDate = request.ExpDate,
-                CVV2 = request.CVV2
-            }, cancellationToken);
+            var createdCard = await _repository.CreateAsync(_mapper.Map<Card>(request), cancellationToken);
 
             return Ok(new CreateCardResponse
             {
@@ -108,15 +105,7 @@ public class CardApiController : ControllerBase
     {
         try
         {
-            var createdClient = await _repository.UpdateAsync(new Kaihatsu.CardManager.DAL.Entities.Card
-            {
-                ClientId = request.ClientId,
-                CardNumber = request.CardNo,
-                Name = request.Name,
-                CVV2 = request.CVV2,
-                ExpDate = request.ExpDate
-                
-            }, cancellationToken);
+            var createdClient = await _repository.UpdateAsync(_mapper.Map<Card>(request), cancellationToken);
 
             return Ok(new UpdateCardResponse
             {
@@ -140,15 +129,7 @@ public class CardApiController : ControllerBase
     {
         try
         {
-            var createdClient = await _repository.DeleteAsync(new Kaihatsu.CardManager.DAL.Entities.Card
-            {
-                ClientId = request.ClientId,
-                CardNumber = request.CardNo,
-                Name = request.Name,
-                CVV2 = request.CVV2,
-                ExpDate = request.ExpDate
-
-            }, cancellationToken);
+            var createdClient = await _repository.DeleteAsync(_mapper.Map<Card>(request), cancellationToken);
 
             return Ok(new DeleteCardResponse
             {

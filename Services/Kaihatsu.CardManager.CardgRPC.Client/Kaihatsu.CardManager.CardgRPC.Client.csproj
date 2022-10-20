@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Exe</OutputType>
+    <StartupObject>Kaihatsu.CardManager.CardgRPC.Client.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\Kaihatsu.CardManager.CardgRPC\Protos\protobuf.proto" Link="protobuf.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Google.Protobuf" Version="3.21.7" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.49.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.49.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+</Project>

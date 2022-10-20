@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option csharp_namespace = "Kaihatsu.CardManager.CardgRPC.Protos";
+
+service ClientService {
+
+	rpc Create (CreateClientRequest) returns (CreateClientResponse);
+
+}
+
+service CardService {
+	rpc GetByIdCard (GetByIdCardRequest) returns (GetByIdCardResponse);
+}
+
+
+message CreateClientRequest{
+		string SurName = 1;
+		string FirstName = 2;
+		string Patronymic = 3;
+}
+
+message CreateClientResponse{
+	string Id =  1;
+	int32 ErrorCode = 2;
+	string ErrorMessage = 3;
+}
+
+
+message GetByIdCardRequest{
+	string Id =  1;
+}
+
+message GetByIdCardResponse{
+	string Id =  1;
+	int32 ErrorCode = 2;
+	string ErrorMessage = 3;
+}
+
+message UUID {
+	string value = 1;
+}
